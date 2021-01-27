@@ -7,83 +7,31 @@ namespace InnRoadEmpoyeeNotificationService
 {
     class Admin : Employee
     {
-        private NotificationService _notificationService;
-        private List<NotificationDomain> _listOfNotificationDomain;
+        private INotificationStrategy _notificationStrategy;
         public Admin()
         {
-            _notificationService = new NotificationService();
+            _notificationStrategy = new NotificationStrategy();
         }
-
+            
         public void NotifyAllEmployeesViaGmail(List<Employee> employeeList)
         {
-            _listOfNotificationDomain = new List<NotificationDomain>();
-            foreach(var employee in employeeList)
-            {
-                 NotificationDomain notificationDomain = new NotificationDomain();
-                 notificationDomain.AddFavourableNotificationType(NotificationType.Gmail);
-                 notificationDomain.EmployeeToBeNotified = employee;
-                _listOfNotificationDomain.Add(notificationDomain);
-
-            }
-
-            foreach (var notificationDomain in _listOfNotificationDomain)
-            {
-                _notificationService.Notify(notificationDomain);
-
-            }
-
+            _notificationStrategy.NotifyViaSingleService(employeeList, NotificationType.Gmail);
+        
         }
-
-
 
         public void NotifyAllEmployeesViaOutlook(List<Employee> employeeList)
         {
-            _listOfNotificationDomain = new List<NotificationDomain>();
-            foreach (var employee in employeeList)
-            {
-                NotificationDomain notificationDomain = new NotificationDomain();
-                notificationDomain.AddFavourableNotificationType(NotificationType.Outlook);
-                notificationDomain.EmployeeToBeNotified = employee;
-                _listOfNotificationDomain.Add(notificationDomain);
-
-            }
-
-            foreach (var notificationDomain in _listOfNotificationDomain)
-            {
-                _notificationService.Notify(notificationDomain);
-
-            }
-
-
+            _notificationStrategy.NotifyViaSingleService(employeeList, NotificationType.Outlook);           
         }
 
         public void NotifyAllEmployeesViaMobile(List<Employee> employeeList)
         {
-
-            _listOfNotificationDomain = new List<NotificationDomain>();
-            foreach (var employee in employeeList)
-            {
-                NotificationDomain notificationDomain = new NotificationDomain();
-                notificationDomain.AddFavourableNotificationType(NotificationType.Mobile);
-                notificationDomain.EmployeeToBeNotified = employee;
-                _listOfNotificationDomain.Add(notificationDomain);
-
-            }
-
-            foreach (var notificationDomain in _listOfNotificationDomain)
-            {
-                _notificationService.Notify(notificationDomain);
-
-            }
-
-
-
-
+            _notificationStrategy.NotifyViaSingleService(employeeList, NotificationType.Mobile);         
         }
 
-        public void NotifyAllEmployeesViaAllServices()
+        public void NotifyAllEmployeesViaAllServices(List<Employee> employeeList)
         {
-
+            _notificationStrategy.NotifyViaAllServices(employeeList);         
         }
 
         public void NotifyOneDepartmentViaGmail()
@@ -93,27 +41,23 @@ namespace InnRoadEmpoyeeNotificationService
 
         public void NotifyOneDepartmentViaOutlook()
         {
-
         }
 
         public void NotifyOneDepartmentViaMobile()
         {
-
         }
 
         public void NotifyOneDepartmentViaAllServices()
         {
-
         }
-
-
+        
         public OperationType ShowAvailableOptions()
         {
 
-            Console.WriteLine( "1.Notify all employees through GMAIL." );
+            Console.WriteLine("1.Notify all employees through GMAIL.");
             Console.WriteLine("2.Notify all employees through OUTLOOK.");
             Console.WriteLine("3.Notify all employees through MOBILE.");
-           Console.WriteLine("4.Notify all employees through GMAIL && OUTLOOK && MOBILE");
+            Console.WriteLine("4.Notify all employees through GMAIL && OUTLOOK && MOBILE");
             Console.WriteLine("5.Notify employees of Department 'X' through GMAIL.");
             Console.WriteLine("6.Notify employees of Department 'X' through OUTLOOK.");
             Console.WriteLine("7.Notify employees of Department 'X' through MOBILE.");
@@ -124,7 +68,6 @@ namespace InnRoadEmpoyeeNotificationService
             return (OperationType)choice - 1;
 
         }
-
 
     }
 }

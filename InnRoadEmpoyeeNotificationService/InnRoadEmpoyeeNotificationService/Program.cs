@@ -31,6 +31,7 @@ namespace InnRoadEmpoyeeNotificationService
                         break;
 
                     case OperationType.SendAllViaAllServices:
+                        admin.NotifyAllEmployeesViaAllServices(listOfEmployees);
                         break;
 
                     case OperationType.SendOneDepartmentViaGmail:

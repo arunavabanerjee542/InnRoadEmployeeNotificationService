@@ -5,18 +5,15 @@ using System.Text;
 
 namespace InnRoadEmpoyeeNotificationService
 {
-    class NotificationDomain
+    public class NotificationDomain
     {
         private List<NotificationType> _favourableTypeOfNotifications;
-
         public Employee EmployeeToBeNotified { get; set; }
 
         public NotificationDomain()
         {
             _favourableTypeOfNotifications = new List<NotificationType>();
         }
-
-
 
         public List<NotificationType> GetFavourableTypeOfNotofications()
         {

@@ -13,10 +13,6 @@ namespace InnRoadEmpoyeeNotificationService
 
     public void Notify(NotificationDomain notificationDomain)
       {
-            /*
-       List<NotificationType> listOfNotificationType = 
-                notificationDomain.GetFavourableTypeOfNotofications();
-                */
 
             foreach(var notificationType in notificationDomain.GetFavourableTypeOfNotofications())
             {
